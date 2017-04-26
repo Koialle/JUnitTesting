@@ -18,7 +18,7 @@ import persons.Person;
  *
  * @author Ophélie EOUZAN
  */
-public class TestOutilsPerson {
+public class OutilsPersonTest {
 
     protected List<IPerson> people = new ArrayList();
     protected List<IPerson> doublons = new ArrayList();
@@ -28,7 +28,6 @@ public class TestOutilsPerson {
     
     @Before
     public void setUp() {
-//
         person1 = Mockito.mock(Person.class);
         person2 = Mockito.mock(Person.class);
         person3 = Mockito.mock(Person.class);
@@ -47,6 +46,24 @@ public class TestOutilsPerson {
 
         people = Arrays.asList(person2, person3, person4, person5, person6, person7);
         doublons = Arrays.asList(person1, person2, person3, person4, person5, person6, person7, person1, person7);
+    }
+    
+    @Test
+    public void testInstanciation()
+    {
+        assertNotNull(new OutilsPerson());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetPersonsInRangeAgeException()
+    {
+        OutilsPerson.getPersonsInRangeAge(new ArrayList(), date, 1, 0);
+    }
+    
+    @Test
+    public void getOldestEmpty()
+    {
+        assertEquals(-1, OutilsPerson.getOldest(new ArrayList(), date));
     }
     
     @Test
